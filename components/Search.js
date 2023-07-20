@@ -1,6 +1,22 @@
 "use client";
 
-export default function Search() {
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+
+const Search = () => {
+  const [searchQuery, setSearchQuery] = useState("");
+  const router = useRouter();
+
+  const handleSearch = () => {
+    if (searchQuery.trim() !== "") {
+      router.push(`/searchResults?query=${encodeURIComponent(searchQuery)}`);
+    }
+    // console.log("User Searched for: ", searchQuery);
+    event.preventDefault();
+    console.log(searchQuery);
+    // prevents the page from updating when the user runs the search.
+  };
+
   return (
     <div>
       <form className="mx-8 my-3">
@@ -15,23 +31,29 @@ export default function Search() {
             >
               <path
                 stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
                 d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
               />
             </svg>
           </div>
           <input
+            autoComplete="off"
             type="search"
             id="default-search"
-            className="block w-full p-4 pl-10 text-sm text-white border border-gray-300 rounded-lg bg-zinc-800 dark:placeholder-zinc-400 dark:text-white"
+            className="block w-full p-4 pl-10 text-sm text-white border border-gray-300 rounded-lg bg-zinc-800 dark:placeholder-zinc-400 dark:text-red-400 text-center"
             placeholder="Search city, zip code, etc."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            // updates search query to user input
             required
           />
           <button
             type="submit"
-            className="text-white absolute right-2.5 bottom-2.5 bg-blue-400 hover:bg-red-400 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-500 dark:hover:red-500 dark:focus:ring-red-600"
+            onClick={handleSearch}
+            // when clicked runs the handle search function
+            className="text-white absolute right-2.5 bottom-2.5 bg-blue-400 hover:bg-red-400 focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-4 py-2"
           >
             Search
           </button>
@@ -39,4 +61,6 @@ export default function Search() {
       </form>
     </div>
   );
-}
+};
+
+export default Search;
