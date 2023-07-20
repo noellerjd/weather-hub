@@ -9,11 +9,10 @@ const Search = () => {
 
   const handleSearch = () => {
     if (searchQuery.trim() !== "") {
-      router.push(`/searchResults?query=${encodeURIComponent(searchQuery)}`);
+      router.push(`/searchResults?location=${encodeURIComponent(searchQuery)}`);
     }
     // console.log("User Searched for: ", searchQuery);
     event.preventDefault();
-    console.log(searchQuery);
     // prevents the page from updating when the user runs the search.
   };
 
