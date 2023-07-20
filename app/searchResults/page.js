@@ -23,28 +23,29 @@ const getWeatherData = async (location) => {
   return forecastData;
 };
 
-// http://api.openweathermap.org/geo/1.0/direct?q=${search}&limit=1&appid=${apiKey}
-
 const SearchResults = async ({ searchParams }) => {
   const forecastData = await getWeatherData(searchParams.location);
   if (forecastData === null) {
     return (
       <div>
-        <h1>Error: Could not find data.</h1>
+        <h1>
+          Error: Could not find data for{" "}
+          <span className="text-red-400">{searchParams.location}</span>. Please
+          try restructuring your search.
+        </h1>
       </div>
     );
   }
-
-  // console.log(forecastData.daily);
 
   return (
     <div>
       <div className="flex justify-center">
         <h1 className="text-center bg-zinc-800 w-fit text-2xl text-white px-3 py-2 rounded-md">
-          5-Day Forecast
+          5-Day Forecast for{" "}
+          <span className="text-red-400">{searchParams.location}</span>
         </h1>
       </div>
-      <div className="flex justify-evenly">
+      <div className="flex flex-wrap justify-evenly mt-3 px-2 pb-3 bg-zinc-700 rounded-md">
         {forecastData.daily.map((weather, i) => {
           if (i >= 5) {
             return;

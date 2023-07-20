@@ -8,12 +8,14 @@ const Search = () => {
   const router = useRouter();
 
   const handleSearch = () => {
-    if (searchQuery.trim() !== "") {
-      router.push(`/searchResults?location=${encodeURIComponent(searchQuery)}`);
+    const trimmedQuery = searchQuery.trim();
+    if (trimmedQuery !== "") {
+      router.push(
+        `/searchResults?location=${encodeURIComponent(trimmedQuery)}`
+      );
     }
-    // console.log("User Searched for: ", searchQuery);
+    console.log(trimmedQuery);
     event.preventDefault();
-    // prevents the page from updating when the user runs the search.
   };
 
   return (
@@ -42,7 +44,7 @@ const Search = () => {
             type="search"
             id="default-search"
             className="block w-full p-4 pl-10 text-sm text-white border border-gray-300 rounded-lg bg-zinc-800 dark:placeholder-zinc-400 dark:text-red-400 text-center"
-            placeholder="Search city, zip code, etc."
+            placeholder="Example, AB USA"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             // updates search query to user input
