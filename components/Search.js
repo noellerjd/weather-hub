@@ -16,6 +16,7 @@ const Search = () => {
     }
     console.log(trimmedQuery);
     event.preventDefault();
+    setSearchQuery("");
   };
 
   return (
@@ -54,7 +55,7 @@ const Search = () => {
             type="submit"
             onClick={handleSearch}
             // when clicked runs the handle search function
-            className="text-white absolute right-2.5 bottom-2.5 bg-blue-400 hover:bg-red-400 focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-4 py-2"
+            className="text-white absolute right-2.5 bottom-2.5 bg-blue-400 hover:bg-red-400 focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-2 py-2"
           >
             Search
           </button>

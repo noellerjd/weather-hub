@@ -18,8 +18,8 @@ const getWeatherData = async (location) => {
   const forecastResponse = await fetch(
     `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=${exclude}&appid=${process.env.API_KEY}&units=imperial`
   );
-
   const forecastData = await forecastResponse.json();
+
   return forecastData;
 };
 
@@ -36,20 +36,18 @@ const SearchResults = async ({ searchParams }) => {
       </div>
     );
   }
+  // console.log(forecastData);
 
   return (
     <div>
       <div className="flex justify-center">
         <h1 className="text-center bg-zinc-800 w-fit text-2xl text-white px-3 py-2 rounded-md">
-          5-Day Forecast for{" "}
+          Forecast for{" "}
           <span className="text-red-400">{searchParams.location}</span>
         </h1>
       </div>
       <div className="flex flex-wrap justify-evenly mt-3 px-2 pb-3 bg-zinc-700 rounded-md">
         {forecastData.daily.map((weather, i) => {
-          if (i >= 5) {
-            return;
-          }
           return <WeatherCard weatherData={weather} key={i} />;
         })}
       </div>

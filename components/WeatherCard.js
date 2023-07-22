@@ -4,9 +4,10 @@ import { format } from "date-fns";
 export default function WeatherCard({ weatherData }) {
   const getDay = (time) => {
     const date = new Date(time * 1000);
-
-    return format(date, "EEEE");
+    return format(date, "EEEE, do");
   };
+
+  const rainChance = Math.round(weatherData.pop * 100);
 
   return (
     <div className="flex justify-center pt-3 mx-2">
@@ -30,7 +31,7 @@ export default function WeatherCard({ weatherData }) {
         </ul>
         <ul className="text-center px-2 mt-0 bg-white rounded-b-md">
           <p>Wind Speed: {weatherData.wind_speed}mph</p>
-          <p>Chance for Rain {weatherData.wind_speed}%</p>
+          <p>Chance for Rain {rainChance}%</p>
         </ul>
       </div>
     </div>
